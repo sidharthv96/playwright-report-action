@@ -33,6 +33,7 @@ export const createReport = (
         failures: getFailureDetails(headReport),
         body: '',
     };
+    console.log({ formattedErrors, coverage });
     const formattedReport = formatRunReport(runReport);
     return {
         report: insertArgs(template, {
