@@ -86,7 +86,7 @@ async function run() {
         }
     );
 
-    console.log('###SID###');
+    console.log('###SID2###');
 
     await runStage('publishReport', dataCollector, async (skip) => {
         if (!isReportContentGenerated) {
