@@ -33,8 +33,8 @@ export const createReport = (
         failures: getFailureDetails(headReport),
         body: '',
     };
-    console.log({ formattedErrors, coverage });
     const formattedReport = formatRunReport(runReport);
+    console.log({ formattedErrors, coverage, formattedReport });
     return {
         report: insertArgs(template, {
             body: [formattedErrors, coverage, formattedReport].join('\n'),
