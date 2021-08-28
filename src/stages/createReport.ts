@@ -34,7 +34,7 @@ export const createReport = (
         body: '',
     };
     const formattedReport = formatRunReport(runReport);
-    console.log({ formattedErrors, coverage, formattedReport });
+    console.log({ template });
     return {
         report: insertArgs(template, {
             body: [formattedErrors, coverage, formattedReport].join('\n'),
