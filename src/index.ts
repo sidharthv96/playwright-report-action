@@ -149,6 +149,7 @@ async function run() {
     });
 
     if (dataCollector.get().errors.length > 0) {
+        console.log(dataCollector.get().errors);
         setFailed(i18n('failed'));
     }
 }
