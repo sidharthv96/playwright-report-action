@@ -1,21 +1,18 @@
 import { context } from '@actions/github';
 
 import { CreateCheckOptions } from './CreateCheckOptions';
-import { getFailedAnnotationsSummary } from './getFailedAnnotationsSummary';
 import { getFailedTestsAnnotationsBody } from './getFailedTestsAnnotationsBody';
 import { Annotation } from '../../annotations/Annotation';
-import { FailureReport } from '../../typings/FailureReport';
-import { JsonReport } from '../../typings/JsonReport';
+import { TestRunReport } from '../../typings/TestRunReport';
 import { insertArgs } from '../../utils/insertArgs';
 import {
     failedTestsCheckName,
     testsFail,
-    testsSuccess,
     tooMuchAnnotations,
 } from '../strings.json';
 
 export const formatFailedTestsAnnotations = (
-    failureReport: FailureReport,
+    runReport: TestRunReport,
     annotations: Array<Annotation>
 ): CreateCheckOptions => ({
     ...context.repo,
@@ -27,7 +24,7 @@ export const formatFailedTestsAnnotations = (
         // Will failureTestAnnotation be generated if jsonReport.success is true?
         title: testsFail,
         text: [
-            getFailedTestsAnnotationsBody(failureReport),
+            getFailedTestsAnnotationsBody(runReport),
             annotations.length > 50 &&
                 insertArgs(tooMuchAnnotations, {
                     hiddenCount: annotations.length - 50,
@@ -35,7 +32,7 @@ export const formatFailedTestsAnnotations = (
         ]
             .filter(Boolean)
             .join('\n'),
-        summary: failureReport.summary,
+        summary: runReport.summary,
         annotations: annotations.slice(0, 49),
     },
 });
