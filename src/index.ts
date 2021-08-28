@@ -108,9 +108,8 @@ async function run() {
         }
     });
 
-    console.log('failedTestsAnnotations');
-
     await runStage('failedTestsAnnotations', dataCollector, async (skip) => {
+        console.log({ isHeadCoverageGenerated });
         if (!isInitialized || isHeadCoverageGenerated) {
             skip();
         }
