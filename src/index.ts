@@ -86,6 +86,10 @@ async function run() {
         }
     );
 
+    console.log('###SID###');
+    console.log(reportContent);
+    console.log(headCoverage);
+
     await runStage('publishReport', dataCollector, async (skip) => {
         if (!isReportContentGenerated) {
             skip();
