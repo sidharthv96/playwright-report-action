@@ -25,7 +25,7 @@ export const createReport = (
     const formattedErrors = formatErrors(errors);
 
     const coverage = formatCoverage(headReport, baseReport, undefined);
-    console.log({ headReport });
+    console.log(headReport.testResults);
     const runReport: TestRunReport = {
         title: headReport.success ? testsSuccess : testsFail,
         summary: getTestRunSummary(headReport),
