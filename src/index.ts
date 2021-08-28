@@ -86,8 +86,6 @@ async function run() {
         }
     );
 
-    console.log('###SID2###');
-
     await runStage('publishReport', dataCollector, async (skip) => {
         if (!isReportContentGenerated) {
             skip();
@@ -97,7 +95,7 @@ async function run() {
 
         if (isInPR) {
             await generatePRReport(
-                reportContent!,
+                reportContent?.report!,
                 options!.workingDirectory,
                 context.repo,
                 context.payload.pull_request!,
@@ -117,8 +115,6 @@ async function run() {
         const octokit = getOctokit(options!.token);
         const failedAnnotations = createFailedTestsAnnotations(headCoverage!);
 
-        console.log({ headCoverage });
-        console.log({ failedAnnotations });
         if (failedAnnotations.length === 0) {
             skip();
         }

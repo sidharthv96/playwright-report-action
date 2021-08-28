@@ -1,8 +1,5 @@
-import stripAnsi from 'strip-ansi';
-
-import { JsonReport } from '../../typings/JsonReport';
+import { TestRunReport } from '../../typings/TestRunReport';
 import { i18n } from '../../utils/i18n';
-import { getFailureDetails } from '../getFormattedFailures';
 
-export const getFailedTestsAnnotationsBody = (jsonReport: JsonReport) =>
-    i18n('testsFailSummaryPt2') + getFailureDetails(jsonReport);
+export const getFailedTestsAnnotationsBody = (report: TestRunReport) =>
+    i18n('testsFailSummaryPt2') + report.failures;

@@ -1,4 +1,5 @@
 import { CoverageDetailsMap, CoverageSummary } from './Coverage';
+import { TestRunReport } from './TestRunReport';
 
 export enum FailReason {
     TESTS_FAILED = 'testsFailed',
@@ -13,4 +14,9 @@ export type Report = {
     details?: CoverageDetailsMap;
     failReason?: FailReason;
     error?: Error;
+};
+
+export type SummaryReport = {
+    report: string;
+    runReport: TestRunReport;
 };

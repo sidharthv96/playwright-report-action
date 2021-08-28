@@ -4,6 +4,7 @@ import { CreateCheckOptions } from './CreateCheckOptions';
 import { getFailedAnnotationsSummary } from './getFailedAnnotationsSummary';
 import { getFailedTestsAnnotationsBody } from './getFailedTestsAnnotationsBody';
 import { Annotation } from '../../annotations/Annotation';
+import { FailureReport } from '../../typings/FailureReport';
 import { JsonReport } from '../../typings/JsonReport';
 import { insertArgs } from '../../utils/insertArgs';
 import {
@@ -14,18 +15,19 @@ import {
 } from '../strings.json';
 
 export const formatFailedTestsAnnotations = (
-    jsonReport: JsonReport,
+    failureReport: FailureReport,
     annotations: Array<Annotation>
 ): CreateCheckOptions => ({
     ...context.repo,
     status: 'completed',
     head_sha: context.payload.pull_request?.head.sha ?? context.sha,
-    conclusion: jsonReport.success ? 'success' : 'failure',
+    conclusion: 'failure',
     name: failedTestsCheckName,
     output: {
-        title: jsonReport.success ? testsSuccess : testsFail,
+        // Will failureTestAnnotation be generated if jsonReport.success is true?
+        title: testsFail,
         text: [
-            getFailedTestsAnnotationsBody(jsonReport),
+            getFailedTestsAnnotationsBody(failureReport),
             annotations.length > 50 &&
                 insertArgs(tooMuchAnnotations, {
                     hiddenCount: annotations.length - 50,
@@ -33,7 +35,7 @@ export const formatFailedTestsAnnotations = (
         ]
             .filter(Boolean)
             .join('\n'),
-        summary: getFailedAnnotationsSummary(jsonReport),
+        summary: failureReport.summary,
         annotations: annotations.slice(0, 49),
     },
 });
