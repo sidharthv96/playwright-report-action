@@ -74,7 +74,7 @@ async function run() {
         dataCollector.add(baseCoverage);
     }
 
-    const [isReportContentGenerated, reportContent] = await runStage(
+    const [isReportContentGenerated, summaryReport] = await runStage(
         'generateReportContent',
         dataCollector,
         async (skip) => {
@@ -95,14 +95,18 @@ async function run() {
 
         if (isInPR) {
             await generatePRReport(
-                reportContent?.report!,
+                summaryReport!.report,
                 options!.workingDirectory,
                 context.repo,
                 context.payload.pull_request!,
                 octokit
             );
         } else {
-            await generateCommitReport(reportContent!, context.repo, octokit);
+            await generateCommitReport(
+                summaryReport!.report,
+                context.repo,
+                octokit
+            );
         }
     });
 
@@ -120,7 +124,7 @@ async function run() {
         }
 
         const failed = formatFailedTestsAnnotations(
-            headCoverage!,
+            summaryReport!.runReport,
             failedAnnotations
         );
         console.log({ failed });
