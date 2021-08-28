@@ -5,6 +5,7 @@ import { getFailedTestsAnnotationsBody } from '../format/annotations/getFailedTe
 import { getTestRunSummary } from '../format/annotations/getTestRunSummary';
 import { formatCoverage } from '../format/formatCoverage';
 import { formatErrors } from '../format/formatErrors';
+import { formatRunReport } from '../format/formatRunReport';
 import { getFailureDetails } from '../format/getFormattedFailures';
 import { testsFail, testsSuccess } from '../format/strings.json';
 import template from '../format/template.md';
@@ -32,10 +33,10 @@ export const createReport = (
         failures: getFailureDetails(headReport),
         body: '',
     };
-
+    const formattedReport = formatRunReport(runReport);
     return {
         report: insertArgs(template, {
-            body: [formattedErrors, coverage, runReport.failures].join('\n'),
+            body: [formattedErrors, coverage, formattedReport].join('\n'),
             dir: workingDirectory || '',
             tag: getReportTag(workingDirectory),
             title: insertArgs(customTitle || i18n('summaryTitle'), {
