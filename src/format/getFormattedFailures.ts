@@ -7,6 +7,6 @@ export const getFailureDetails = (report: JsonReport): string =>
         ? '\n```bash\n' +
           report.testResults
               ?.map(({ message }) => stripAnsi(message))
-              .join('```\n```bash') +
+              .join('```\n---\n```bash\n') +
           '```'
         : '';
