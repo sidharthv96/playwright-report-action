@@ -108,6 +108,8 @@ async function run() {
         }
     });
 
+    console.log('failedTestsAnnotations');
+
     await runStage('failedTestsAnnotations', dataCollector, async (skip) => {
         if (!isInitialized || isHeadCoverageGenerated) {
             skip();
@@ -120,9 +122,12 @@ async function run() {
             skip();
         }
 
-        await octokit.checks.create(
-            formatFailedTestsAnnotations(headCoverage!, failedAnnotations)
+        const failed = formatFailedTestsAnnotations(
+            headCoverage!,
+            failedAnnotations
         );
+        console.log({ failed });
+        await octokit.checks.create(failed);
     });
 
     await runStage('coverageAnnotations', dataCollector, async (skip) => {
