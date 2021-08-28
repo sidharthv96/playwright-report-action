@@ -7,6 +7,6 @@ build({
     entryPoints: ['src/index.ts'],
     outfile: 'dist/index.js',
     loader: {
-        md: 'text',
+        '.md': 'text',
     },
 }).catch(() => process.exit(1));
