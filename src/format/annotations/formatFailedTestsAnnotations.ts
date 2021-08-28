@@ -3,7 +3,7 @@ import { context } from '@actions/github';
 import { CreateCheckOptions } from './CreateCheckOptions';
 import { getFailedTestsAnnotationsBody } from './getFailedTestsAnnotationsBody';
 import { Annotation } from '../../annotations/Annotation';
-import { TestRunReport } from '../../typings/TestRunReport';
+import { TestRunReport } from '../../typings/Report';
 import { insertArgs } from '../../utils/insertArgs';
 import {
     failedTestsCheckName,
@@ -21,7 +21,6 @@ export const formatFailedTestsAnnotations = (
     conclusion: 'failure',
     name: failedTestsCheckName,
     output: {
-        // Will failureTestAnnotation be generated if jsonReport.success is true?
         title: testsFail,
         text: [
             getFailedTestsAnnotationsBody(runReport),

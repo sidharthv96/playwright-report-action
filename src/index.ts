@@ -95,7 +95,7 @@ async function run() {
 
         if (isInPR) {
             await generatePRReport(
-                summaryReport!.report,
+                summaryReport!.text,
                 options!.workingDirectory,
                 context.repo,
                 context.payload.pull_request!,
@@ -103,7 +103,7 @@ async function run() {
             );
         } else {
             await generateCommitReport(
-                summaryReport!.report,
+                summaryReport!.text,
                 context.repo,
                 octokit
             );
@@ -111,12 +111,10 @@ async function run() {
     });
 
     await runStage('failedTestsAnnotations', dataCollector, async (skip) => {
-        console.log({ isHeadCoverageGenerated });
-        if (!isInitialized) {
+        if (!isInitialized || !isHeadCoverageGenerated) {
             skip();
         }
 
-        const octokit = getOctokit(options!.token);
         const failedAnnotations = createFailedTestsAnnotations(headCoverage!);
 
         if (failedAnnotations.length === 0) {
@@ -127,29 +125,29 @@ async function run() {
             summaryReport!.runReport,
             failedAnnotations
         );
-        console.log({ failed });
+
+        const octokit = getOctokit(options!.token);
         await octokit.checks.create(failed);
     });
 
     await runStage('coverageAnnotations', dataCollector, async (skip) => {
-        if (!isInitialized) {
+        if (!isInitialized || !isHeadCoverageGenerated) {
             skip();
         }
 
-        const octokit = getOctokit(options!.token);
         const coverageAnnotations = createCoverageAnnotations(headCoverage!);
 
         if (coverageAnnotations.length === 0) {
             skip();
         }
 
+        const octokit = getOctokit(options!.token);
         await octokit.checks.create(
             formatCoverageAnnotations(coverageAnnotations)
         );
     });
 
     if (dataCollector.get().errors.length > 0) {
-        console.log(dataCollector.get().errors);
         setFailed(i18n('failed'));
     }
 }

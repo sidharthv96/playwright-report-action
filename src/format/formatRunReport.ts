@@ -1,15 +1,16 @@
-import { TestRunReport } from '../typings/TestRunReport';
+import { TestRunReport } from '../typings/Report';
 
 export const formatRunReport = (report: TestRunReport): string => {
-    let body = `# ${report.title}\n`;
+    const parts = [`# ${report.title}`];
     if (report.failures) {
-        body += `
-<details>
-<summary>${report.summary}</summary>
-${report.failures}
-</details>`;
+        parts.push(
+            '<details>',
+            `<summary>${report.summary}</summary>`,
+            report.failures,
+            '</details>'
+        );
     } else {
-        body += `## ${report.summary}`;
+        parts.push(`## ${report.summary}`);
     }
-    return body;
+    return parts.join('\n');
 };

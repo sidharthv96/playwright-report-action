@@ -1,7 +1,6 @@
 import { context } from '@actions/github';
 
 import { getReportTag } from '../constants/getReportTag';
-import { getFailedTestsAnnotationsBody } from '../format/annotations/getFailedTestsAnnotationsBody';
 import { getTestRunSummary } from '../format/annotations/getTestRunSummary';
 import { formatCoverage } from '../format/formatCoverage';
 import { formatErrors } from '../format/formatErrors';
@@ -11,7 +10,7 @@ import { testsFail, testsSuccess } from '../format/strings.json';
 import template from '../format/template.md';
 import { JsonReport } from '../typings/JsonReport';
 import { SummaryReport } from '../typings/Report';
-import { TestRunReport } from '../typings/TestRunReport';
+import { TestRunReport } from '../typings/Report';
 import { DataCollector } from '../utils/DataCollector';
 import { i18n } from '../utils/i18n';
 import { insertArgs } from '../utils/insertArgs';
@@ -26,17 +25,14 @@ export const createReport = (
     const formattedErrors = formatErrors(errors);
 
     const coverage = formatCoverage(headReport, baseReport, undefined);
-    console.log(headReport.testResults);
     const runReport: TestRunReport = {
         title: headReport.success ? testsSuccess : testsFail,
         summary: getTestRunSummary(headReport),
         failures: getFailureDetails(headReport),
-        body: '',
     };
     const formattedReport = formatRunReport(runReport);
-    console.log({ template });
     return {
-        report: insertArgs(template, {
+        text: insertArgs(template, {
             body: [formattedErrors, coverage, formattedReport].join('\n'),
             dir: workingDirectory || '',
             tag: getReportTag(workingDirectory),
