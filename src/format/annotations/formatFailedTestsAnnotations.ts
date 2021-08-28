@@ -20,7 +20,7 @@ export const formatFailedTestsAnnotations = (
     ...context.repo,
     status: 'completed',
     head_sha: context.payload.pull_request?.head.sha ?? context.sha,
-    conclusion: 'success',
+    conclusion: jsonReport.success ? 'success' : 'failure',
     name: failedTestsCheckName,
     output: {
         title: jsonReport.success ? testsSuccess : testsFail,

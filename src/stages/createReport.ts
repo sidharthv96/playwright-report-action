@@ -4,6 +4,7 @@ import { getReportTag } from '../constants/getReportTag';
 import { getFailedTestsAnnotationsBody } from '../format/annotations/getFailedTestsAnnotationsBody';
 import { formatCoverage } from '../format/formatCoverage';
 import { formatErrors } from '../format/formatErrors';
+import { getFailureDetails } from '../format/getFormattedFailures';
 import template from '../format/template.md';
 import { JsonReport } from '../typings/JsonReport';
 import { DataCollector } from '../utils/DataCollector';
@@ -20,7 +21,7 @@ export const createReport = (
     const formattedErrors = formatErrors(errors);
 
     const coverage = formatCoverage(headReport, baseReport, undefined);
-    const failures = getFailedTestsAnnotationsBody(headReport, false);
+    const failures = getFailureDetails(headReport);
 
     return insertArgs(template, {
         body: [formattedErrors, coverage, failures].join('\n'),
