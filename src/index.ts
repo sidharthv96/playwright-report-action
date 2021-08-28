@@ -118,6 +118,8 @@ async function run() {
         const octokit = getOctokit(options!.token);
         const failedAnnotations = createFailedTestsAnnotations(headCoverage!);
 
+        console.log({ headCoverage });
+        console.log({ failedAnnotations });
         if (failedAnnotations.length === 0) {
             skip();
         }
