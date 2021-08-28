@@ -132,7 +132,7 @@ async function run() {
     });
 
     await runStage('coverageAnnotations', dataCollector, async (skip) => {
-        if (!isInitialized || isHeadCoverageGenerated) {
+        if (!isInitialized) {
             skip();
         }
 
