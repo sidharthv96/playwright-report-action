@@ -96,6 +96,7 @@ export const run = async () => {
     });
 
     if (dataCollector.get().errors.length > 0) {
+        console.log(JSON.stringify(dataCollector.get().errors));
         setFailed(i18n('failed'));
     }
 };
