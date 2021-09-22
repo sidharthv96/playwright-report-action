@@ -2,7 +2,7 @@ import { collectCoverage } from './collectCoverage';
 import { installDependencies } from './installDependencies';
 import { parseCoverage } from './parseCoverage';
 import { runTest } from './runTest';
-import { JsonReport } from '../typings/JsonReport';
+import { JSONReport } from '../typings/JsonReport';
 import {
     Options,
     shouldInstallDeps,
@@ -12,10 +12,10 @@ import { DataCollector } from '../utils/DataCollector';
 import { runStage } from '../utils/runStage';
 
 export const getCoverage = async (
-    dataCollector: DataCollector<JsonReport>,
+    dataCollector: DataCollector<JSONReport>,
     options: Options,
     runAll: boolean
-): Promise<JsonReport> => {
+): Promise<JSONReport> => {
     await runStage('install', dataCollector, async (skip) => {
         if (!runAll && !shouldInstallDeps(options.skipStep)) {
             skip();
@@ -26,6 +26,8 @@ export const getCoverage = async (
             options.workingDirectory
         );
     });
+
+    // TODOv1: Could separate the browser install part
 
     await runStage('runTest', dataCollector, async (skip) => {
         if (!runAll && !shouldRunTestScript(options.skipStep)) {

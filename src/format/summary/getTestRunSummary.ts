@@ -1,16 +1,16 @@
-import { JsonReport } from '../../typings/JsonReport';
+import { JSONReport } from '../../typings/JsonReport';
 import { i18n } from '../../utils/i18n';
 
-export const getTestRunSummary = (jsonReport: JsonReport) =>
-    jsonReport.success
+export const getTestRunSummary = ({ summary }: JSONReport) =>
+    summary.success
         ? i18n('testsSuccessSummary', {
-              numPassedTests: jsonReport.numPassedTests,
-              numPassedTestSuites: jsonReport.numPassedTestSuites,
-              ending: jsonReport.numPassedTestSuites > 1 ? 's' : '',
+              numPassedTests: summary.numPassedTests,
+              numPassedTestSuites: summary.numPassedTestSuites,
+              ending: summary.numPassedTestSuites > 1 ? 's' : '',
           })
         : i18n('testsFailSummary', {
-              numFailedTests: jsonReport.numFailedTests,
-              numTotalTests: jsonReport.numTotalTests,
-              numFailedTestSuites: jsonReport.numFailedTestSuites,
-              numTotalTestSuites: jsonReport.numTotalTestSuites,
+              numFailedTests: summary.numFailedTests,
+              numTotalTests: summary.numTotalTests,
+              numFailedTestSuites: summary.numFailedTestSuites,
+              numTotalTestSuites: summary.numTotalTestSuites,
           });
