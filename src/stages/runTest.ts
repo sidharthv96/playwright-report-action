@@ -19,16 +19,15 @@ export const runTest = async (
         cwd: workingDirectory,
     });
 
-    await exec('npx playwright test --help', [], {
+    await exec('npm install', [], {
         // cwd: workingDirectory,
     });
 
     console.log(testCommand);
 
-    await exec(testCommand, [], {
+    await exec('npm run test:ci', [], {
         env: {
             PLAYWRIGHT_JSON_OUTPUT_NAME: 'report.json',
         },
-        cwd: joinPaths(workingDirectory, '..'),
     });
 };
