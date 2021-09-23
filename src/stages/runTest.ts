@@ -5,14 +5,14 @@ export const runTest = async (
     workingDirectory?: string
 ) => {
     console.log(testCommand);
-    console.log(
-        await exec('cwd', [], {
-            // cwd: workingDirectory,
-        })
-    );
+    console.log('cwd');
+    await exec('cwd', [], {
+        cwd: workingDirectory,
+    });
+
     console.log(
         await exec('npx --help', [], {
-            // cwd: workingDirectory,
+            cwd: workingDirectory,
         })
     );
     console.log(
