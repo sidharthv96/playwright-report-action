@@ -5,7 +5,9 @@ export const runTest = async (
     workingDirectory?: string
 ) => {
     console.log(testCommand);
-    await exec(testCommand, [], {
-        // cwd: workingDirectory,
-    });
+    console.log(
+        await exec(testCommand, [], {
+            // cwd: workingDirectory,
+        })
+    );
 };
