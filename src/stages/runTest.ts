@@ -5,6 +5,6 @@ export const runTest = async (
     workingDirectory?: string
 ) => {
     await exec(testCommand, [], {
-        cwd: workingDirectory,
+        // cwd: workingDirectory,
     });
 };
