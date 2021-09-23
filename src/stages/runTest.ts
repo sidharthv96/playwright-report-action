@@ -25,9 +25,5 @@ export const runTest = async (
 
     console.log(testCommand);
 
-    await exec('npm run test:ci', [], {
-        env: {
-            PLAYWRIGHT_JSON_OUTPUT_NAME: 'report.json',
-        },
-    });
+    await exec('npm run test:ci');
 };
