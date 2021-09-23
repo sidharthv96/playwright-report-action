@@ -175,3 +175,4 @@ Jest Coverage Report action is made with <3 thanks to these wonderful people
 ## License
 
 MIT © [Artiom Tretjakovas](https://github.com/ArtiomTr)
+.

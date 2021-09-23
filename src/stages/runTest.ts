@@ -5,16 +5,19 @@ export const runTest = async (
     workingDirectory?: string
 ) => {
     console.log(testCommand);
-    console.log('cwd');
-    await exec('cwd', [], {
+    console.log('pwd');
+    await exec('pwd', undefined, {
         cwd: workingDirectory,
     });
 
-    console.log(
-        await exec('npx --help', [], {
-            cwd: workingDirectory,
-        })
-    );
+    await exec('pwd', undefined, {
+        // cwd: workingDirectory,
+    });
+
+    await exec('npx --help', undefined, {
+        cwd: workingDirectory,
+    });
+
     console.log(
         await exec('npx playwright test --help', [], {
             // cwd: workingDirectory,

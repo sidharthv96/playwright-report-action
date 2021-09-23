@@ -17,7 +17,7 @@ export const installDependencies = async (
         cwd: workingDirectory,
     });
 
-    await exec(`npx playwright install`, undefined, {
-        cwd: workingDirectory,
-    });
+    // await exec(`npx playwright install`, undefined, {
+    //     cwd: workingDirectory,
+    // });
 };
