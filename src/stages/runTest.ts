@@ -1,10 +1,11 @@
 import { exec } from '@actions/exec';
 
+import { joinPaths } from '../utils/joinPaths';
+
 export const runTest = async (
     testCommand: string,
     workingDirectory?: string
 ) => {
-    console.log(testCommand);
     console.log('pwd');
     await exec('pwd', undefined, {
         cwd: workingDirectory,
@@ -18,14 +19,13 @@ export const runTest = async (
         cwd: workingDirectory,
     });
 
-    console.log(
-        await exec('npx playwright test --help', [], {
-            // cwd: workingDirectory,
-        })
-    );
-    console.log(
-        await exec(testCommand, [], {
-            // cwd: workingDirectory,
-        })
-    );
+    await exec('npx playwright test --help', [], {
+        // cwd: workingDirectory,
+    });
+
+    console.log(testCommand);
+
+    await exec(testCommand, [], {
+        cwd: joinPaths(workingDirectory, '..'),
+    });
 };
