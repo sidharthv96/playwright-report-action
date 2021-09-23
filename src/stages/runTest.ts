@@ -26,6 +26,9 @@ export const runTest = async (
     console.log(testCommand);
 
     await exec(testCommand, [], {
+        env: {
+            PLAYWRIGHT_JSON_OUTPUT_NAME: 'report.json',
+        },
         cwd: joinPaths(workingDirectory, '..'),
     });
 };
