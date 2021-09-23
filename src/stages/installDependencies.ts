@@ -14,7 +14,7 @@ export const installDependencies = async (
     });
 
     await exec(`${packageManager} install`, undefined, {
-        cwd: workingDirectory,
+        cwd: joinPaths(workingDirectory, 'app'),
     });
 
     await exec(`npx playwright install`, undefined, {

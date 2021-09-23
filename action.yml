@@ -12,7 +12,7 @@ inputs:
     test-script:
         required: false
         description: 'A custom npm script to get coverage'
-        default: playwright test --silent --ci --coverage --testLocationInResults --json --outputFile="report.json"
+        default: PLAYWRIGHT_JSON_OUTPUT_NAME=report.json npx playwright test --reporter=json,line
     threshold:
         required: false
         description: 'Coverage threshold. If total coverage is less than threshold, PR will be rejected'
