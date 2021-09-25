@@ -49,7 +49,7 @@ Object {
       },
     ],
     "summary": "Coverage report annotations",
-    "text": "Created coverage report annotations. To disable them, see [documentation](https://github.com/ArtiomTr/jest-coverage-report-action#jest-coverage-report-).",
+    "text": "Created coverage report annotations. To disable them, see [documentation](https://github.com/sidharthv96/playwright-report-action#jest-coverage-report-).",
     "title": "Coverage report annotations",
   },
   "status": "completed",
@@ -105,7 +105,7 @@ Object {
       },
     ],
     "summary": "Coverage report annotations",
-    "text": "Created coverage report annotations. To disable them, see [documentation](https://github.com/ArtiomTr/jest-coverage-report-action#jest-coverage-report-).",
+    "text": "Created coverage report annotations. To disable them, see [documentation](https://github.com/sidharthv96/playwright-report-action#jest-coverage-report-).",
     "title": "Coverage report annotations",
   },
   "status": "completed",
@@ -611,7 +611,7 @@ Object {
       },
     ],
     "summary": "Coverage report annotations",
-    "text": "Created coverage report annotations. To disable them, see [documentation](https://github.com/ArtiomTr/jest-coverage-report-action#jest-coverage-report-).
+    "text": "Created coverage report annotations. To disable them, see [documentation](https://github.com/sidharthv96/playwright-report-action#jest-coverage-report-).
 2 annotations hidden. Only 50 can be displayed at once.",
     "title": "Coverage report annotations",
   },

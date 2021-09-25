@@ -20,19 +20,19 @@ export const Footer = () => (
                 </FooterSection>
                 <FooterSection heading="Repository">
                     <FooterLink
-                        href="https://www.github.com/ArtiomTr/jest-coverage-report-action"
+                        href="https://www.github.com/sidharthv96/playwright-report-action"
                         label="GitHub"
                     />
                     <FooterLink
-                        href="https://www.github.com/ArtiomTr/jest-coverage-report-action/issues"
+                        href="https://www.github.com/sidharthv96/playwright-report-action/issues"
                         label="Issues"
                     />
                     <FooterLink
-                        href="https://www.github.com/ArtiomTr/jest-coverage-report-action/releases"
+                        href="https://www.github.com/sidharthv96/playwright-report-action/releases"
                         label="Releases"
                     />
                     <FooterLink
-                        href="https://github.com/ArtiomTr/jest-coverage-report-action/stargazers"
+                        href="https://github.com/sidharthv96/playwright-report-action/stargazers"
                         label="Stars"
                     />
                 </FooterSection>

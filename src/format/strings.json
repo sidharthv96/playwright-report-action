@@ -67,7 +67,7 @@
     "filename": "File",
     "testsFail": "Test suite run failed",
     "testsSuccess": "Test suite run success",
-    "testsFailSummaryPt2": "Created failed tests' annotations. To disable them, see [documentation](https://github.com/ArtiomTr/jest-coverage-report-action#jest-coverage-report-).",
+    "testsFailSummaryPt2": "Created failed tests' annotations. To disable them, see [documentation](https://github.com/sidharthv96/playwright-report-action#jest-coverage-report-).",
     "testsFailSummary": "Failed tests: {{ numFailedTests }}/{{ numTotalTests }}. Failed suites: {{ numFailedTestSuites }}/{{ numTotalTestSuites }}.",
     "testsSuccessSummary": "{{ numPassedTests }} tests passing in {{ numPassedTestSuites }} suite{{ ending }}.",
     "failedTestsCheckName": "Tests annotations (🎭  playwright-report-action)",
@@ -75,8 +75,8 @@
     "errors": {
         "unexpectedError": "An unexpected error occurred. For more details, [check console]({{ consoleLink }})",
         "testsFailed": "The test suite failed. Please, check the console output for more details.",
-        "invalidFormat": "Output of test script has invalid format. Check [documentation](https://github.com/ArtiomTr/jest-coverage-report-action#jest-coverage-report-) for more details.",
-        "unknownError": "Something went wrong. If this is an issue of jest-coverage-report-action, please report about it [here](https://github.com/ArtiomTr/jest-coverage-report-action/issues/new).",
+        "invalidFormat": "Output of test script has invalid format. Check [documentation](https://github.com/sidharthv96/playwright-report-action#jest-coverage-report-) for more details.",
+        "unknownError": "Something went wrong. If this is an issue of jest-coverage-report-action, please report about it [here](https://github.com/sidharthv96/playwright-report-action/issues/new).",
         "reportNotFound": "Playwright output file not found. (file \"{{ coveragePath }}\" not found)",
         "multiple": "Multiple errors occurred"
     },

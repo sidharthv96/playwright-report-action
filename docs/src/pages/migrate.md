@@ -11,7 +11,7 @@ Actually, you need to update only your workflow's configuration.
 
 ## Upgrade steps
 
-A few steps need to be completed to fully migrate from `v1` to `v2`. Don't worry if your action unexpectedly fails - this guide will help you to fix all errors. If after completing this guide your action still failing, please create an [issue](https://www.github.com/ArtiomTr/jest-coverage-report-action/issues) - our community is ready to help you!
+A few steps need to be completed to fully migrate from `v1` to `v2`. Don't worry if your action unexpectedly fails - this guide will help you to fix all errors. If after completing this guide your action still failing, please create an [issue](https://www.github.com/sidharthv96/playwright-report-action/issues) - our community is ready to help you!
 
 ### 1. Different inputs casing
 
@@ -28,8 +28,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
--           - uses: artiomtr/jest-coverage-report-action@v1.3
-+           - uses: artiomtr/jest-coverage-report-action@v2
+-           - uses: sidharthv96/playwright-report-action@v1.3
++           - uses: sidharthv96/playwright-report-action@v2
               with:
 -                  github_token: ${{ secrets.GITHUB_TOKEN }}
 +                  github-token: ${{ secrets.GITHUB_TOKEN }}

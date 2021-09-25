@@ -15,7 +15,7 @@ Jest Coverage Report action's configuration is created in the same way as for [a
 GitHub token. Required parameter. By default, you can use standard GitHub-provided token: `${{ secrets.GITHUB_TOKEN }}`. Example:
 
 ```yaml
-- uses: artiomtr/jest-coverage-report-action@v2
+- uses: sidharthv96/playwright-report-action@v2
     with:
         github-token: \${{ secrets.GITHUB_TOKEN }}
 ```
@@ -27,7 +27,7 @@ If you want to set minimal accepted coverage for the PR, you can pass and option
 For example, if you want to reject every pull request, with total line coverage less than 80%:
 
 ```yaml
-- uses: artiomtr/jest-coverage-report-action@v2
+- uses: sidharthv96/playwright-report-action@v2
     with:
         threshold: 80 # if coverage < 80%, action will fail
 ```
@@ -54,7 +54,7 @@ If you're not satisfied with default behaviour, you can specify your own command
 
 <!-- TODO: replace link -->
 
-**⚠ IMPORTANT: The test script must generate output in a specific format. For more information, see [docs](https://github.com/ArtiomTr/jest-coverage-report-action#customizing-test-script).**
+**⚠ IMPORTANT: The test script must generate output in a specific format. For more information, see [docs](https://github.com/sidharthv96/playwright-report-action#customizing-test-script).**
 
 For instance, if you want to run `test:coverage` npm script:
 

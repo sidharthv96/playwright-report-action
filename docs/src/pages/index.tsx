@@ -38,7 +38,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
-            - uses: artiomtr/jest-coverage-report-action@v2
+            - uses: sidharthv96/playwright-report-action@v2
               with:
                   github-token: \${{ secrets.GITHUB_TOKEN }}
                   #   threshold: 80 # optional parameter
