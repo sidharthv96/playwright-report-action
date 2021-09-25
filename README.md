@@ -23,14 +23,14 @@ This action uses [Playwright](https://github.com/microsoft/playwright) to run e2
 **Minimal configuration**
 
 ```yml
-name: 'coverage'
+name: 'playwright'
 on:
     pull_request:
         branches:
             - master
             - main
 jobs:
-    coverage:
+    playwright:
         runs-on: ubuntu-latest
         if: "!contains(github.event.head_commit.message, '[skip ci]')"
         steps:
@@ -44,18 +44,6 @@ jobs:
 3. Pay attention to the action parameters. You can specify custom [threshold](#specify-threshold) or [test script](#customizing-test-script)
 4. That's it!
 
-## Specify threshold
-
-If you want to set minimal accepted coverage for the PR, you can pass and optional parameter threshold.
-
-For example, if you want to reject every pull request, with total line coverage less than 80%:
-
-```yml
-with:
-    github-token: ${{ secrets.GITHUB_TOKEN }}
-    threshold: 80 # value in percents
-```
-
 ## Custom working directory
 
 If you want to run this action in custom directory, specify `working-directory`:
@@ -68,22 +56,22 @@ with:
 
 ## Customizing test script
 
-By default, this action will run this command, to extract coverage:
+By default, this action will run this command:
 
 ```bash
-npx jest --silent --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
+PLAYWRIGHT_JSON_OUTPUT_NAME="report.json" npx playwright test --reporter=json,line
 ```
 
 If you're not satisfied with default behaviour, you can specify your own command, by passing custom option `test-script`.
 
-> **⚠ IMPORTANT ⚠:** Please, note that this is not simple `npx jest --coverage` script call. If you're specify your custom script, **YOU SHOULD PASS SAME COVERAGE REPORTERS** as it does default script (`text` and `text-summary` reporters). Without those options, your action will not work.
+> **⚠ IMPORTANT ⚠:** Please, note that this is not simple `npx playwright test` script call. If you're specify your custom script, **YOU SHOULD PASS SAME COVERAGE REPORTERS** as it does default script (`json` reporter). Without those options, your action will not work.
 
-For instance, if you want to run `test:coverage` npm script:
+For instance, if you want to run `test:e2e` npm script:
 
 ```yml
 with:
     github-token: ${{ secrets.GITHUB_TOKEN }}
-    test-script: npm run test:coverage
+    test-script: npm run test:e2e
 ```
 
 ## Usage with `yarn`
@@ -102,7 +90,7 @@ To bypass running unit tests, you can pass the filepath to the current report.js
 
 ```yml
 with:
-    coverage-file: ./coverage/report.json
+    coverage-file: ./tests/report.json
 ```
 
 -   `coverage-file` is the filepath to the JSON coverage report for the current pull request.
