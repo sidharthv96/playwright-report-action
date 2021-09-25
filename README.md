@@ -39,10 +39,9 @@ jobs:
         if: "!contains(github.event.head_commit.message, '[skip ci]')"
         steps:
             - uses: actions/checkout@v1
-            - uses: sidharthv96/playwright-report-action@v2.0-rc.1
+            - uses: sidharthv96/playwright-report-action
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
-                  #   threshold: 80 # optional parameter
 ```
 
 3. Pay attention to the action parameters. You can specify custom [threshold](#specify-threshold) or [test script](#customizing-test-script)
