@@ -12478,7 +12478,7 @@ var Ls = {
         invalidFormat:
             'Output of test script has invalid format. Check [documentation](https://github.com/sidharthv96/playwright-report-action#jest-coverage-report-) for more details.',
         unknownError:
-            'Something went wrong. If this is an issue of jest-coverage-report-action, please report about it [here](https://github.com/sidharthv96/playwright-report-action/issues/new).',
+            'Something went wrong. If this is an issue of playwright-report-action, please report about it [here](https://github.com/sidharthv96/playwright-report-action/issues/new).',
         reportNotFound:
             'Playwright output file not found. (file "{{ coveragePath }}" not found)',
         multiple: 'Multiple errors occurred',

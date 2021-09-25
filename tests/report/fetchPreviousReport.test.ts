@@ -15,7 +15,7 @@ describe('fetchPreviousReport', () => {
                 body: 'Another comment',
             },
             {
-                body: `${getReportTag()}\n This is jest-coverage-report-action report`,
+                body: `${getReportTag()}\n This is playwright-report-action report`,
             },
             {
                 body: 'One more comment',
@@ -24,9 +24,9 @@ describe('fetchPreviousReport', () => {
 
         await expect(
             fetchPreviousReport(
-                ({
+                {
                     paginate,
-                } as unknown) as ReturnType<typeof getOctokit>,
+                } as unknown as ReturnType<typeof getOctokit>,
                 {
                     owner: 'bot',
                     repo: 'test-repo',
@@ -36,7 +36,7 @@ describe('fetchPreviousReport', () => {
                 }
             )
         ).resolves.toStrictEqual({
-            body: `${getReportTag()}\n This is jest-coverage-report-action report`,
+            body: `${getReportTag()}\n This is playwright-report-action report`,
         });
 
         expect(paginate).toBeCalledWith(
@@ -59,7 +59,7 @@ describe('fetchPreviousReport', () => {
             {
                 body: `${getReportTag(
                     'folder1'
-                )}\n This is jest-coverage-report-action report`,
+                )}\n This is playwright-report-action report`,
             },
             {
                 body: 'Another comment',
@@ -67,7 +67,7 @@ describe('fetchPreviousReport', () => {
             {
                 body: `${getReportTag(
                     'folder2'
-                )}\n This is jest-coverage-report-action report`,
+                )}\n This is playwright-report-action report`,
             },
             {
                 body: 'One more comment',
@@ -76,9 +76,9 @@ describe('fetchPreviousReport', () => {
 
         await expect(
             fetchPreviousReport(
-                ({
+                {
                     paginate,
-                } as unknown) as ReturnType<typeof getOctokit>,
+                } as unknown as ReturnType<typeof getOctokit>,
                 {
                     owner: 'bot',
                     repo: 'test-repo',
@@ -91,7 +91,7 @@ describe('fetchPreviousReport', () => {
         ).resolves.toStrictEqual({
             body: `${getReportTag(
                 'folder2'
-            )}\n This is jest-coverage-report-action report`,
+            )}\n This is playwright-report-action report`,
         });
     });
 
@@ -112,9 +112,9 @@ describe('fetchPreviousReport', () => {
 
         await expect(
             fetchPreviousReport(
-                ({
+                {
                     paginate,
-                } as unknown) as ReturnType<typeof getOctokit>,
+                } as unknown as ReturnType<typeof getOctokit>,
                 {
                     owner: 'bot',
                     repo: 'test-repo',

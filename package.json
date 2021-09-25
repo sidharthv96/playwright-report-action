@@ -1,5 +1,5 @@
 {
-    "name": "jest-coverage-report-action",
+    "name": "playwright-report-action",
     "private": true,
     "version": "1.0.0",
     "description": "",

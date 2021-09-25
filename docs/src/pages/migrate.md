@@ -42,7 +42,7 @@ jobs:
 
 ### 2. New test script format
 
-In `v2` version `jest-coverage-report-action` uses different format to extract coverage data. If you want to have custom testing script, change it as this example shows:
+In `v2` version `playwright-report-action` uses different format to extract coverage data. If you want to have custom testing script, change it as this example shows:
 
 ```yaml diff
 with:

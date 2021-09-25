@@ -111,7 +111,7 @@
       ]
     }
   ],
-  "projectName": "jest-coverage-report-action",
+  "projectName": "playwright-report-action",
   "projectOwner": "ArtiomTr",
   "repoType": "github",
   "repoHost": "https://github.com",
