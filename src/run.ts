@@ -85,7 +85,10 @@ export const run = async (
             skip();
         }
 
-        const failedAnnotations = createFailedTestsAnnotations(headCoverage!);
+        const failedAnnotations = createFailedTestsAnnotations(
+            headCoverage!,
+            options
+        );
 
         if (failedAnnotations.length === 0) {
             skip();
