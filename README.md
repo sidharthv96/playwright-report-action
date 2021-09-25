@@ -15,10 +15,6 @@
 
 This action uses [Playwright](https://github.com/microsoft/playwright) to run e2e tests, and comments it's results on pull request. Forked from [jest-coverage-report-action](https://github.com/ArtiomTr/jest-coverage-report-action).
 
-<p align="center">
-  <img alt="PR Comment example" width="540" src="./img/Rejected-PR-screenshot.png">
-</p>
-
 ## Usage
 
 1. Install and configure [Playwright](https://github.com/microsoft/playwright).
