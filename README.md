@@ -13,7 +13,7 @@
     <a href="https://github.com/sidharthv96/playwright-report-action/issues"><img alt="Issues" src="https://img.shields.io/github/issues/sidharthv96/playwright-report-action"></img></a>
 </p>
 
-This action uses [Jest](https://github.com/facebook/jest) to extract code coverage, and comments it on pull request. Inspired by [Size-limit action](https://github.com/andresz1/size-limit-action/). Features:
+This action uses [Jest](https://github.com/facebook/jest) to extract code coverage, and comments it on pull request. Forked from [jest-coverage-report-action](https://github.com/ArtiomTr/jest-coverage-report-action). Features:
 
 -   **Reporting** code coverage on each pull request. 📃
 -   **Rejecting** pull request, if coverage is under threshold. ❌
