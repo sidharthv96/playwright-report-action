@@ -94,13 +94,21 @@ export const run = async (
             skip();
         }
 
-        const octokit = getOctokit(options.token);
-        await octokit.checks.create(
-            formatFailedTestsAnnotations(
-                summaryReport!.runReport,
-                failedAnnotations
-            )
+        failedAnnotations.map(
+            ({ path, start_line, end_line, title, message }) => {
+                console.log(
+                    `::error file=${path},line=${start_line},endLine=${end_line},title=${title}::${message}`
+                );
+            }
         );
+
+        // const octokit = getOctokit(options.token);
+        // await octokit.checks.create(
+        //     formatFailedTestsAnnotations(
+        //         summaryReport!.runReport,
+        //         failedAnnotations
+        //     )
+        // );
     });
 
     if (dataCollector.get().errors.length > 0) {
