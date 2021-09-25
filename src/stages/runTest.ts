@@ -7,10 +7,8 @@ export const runTest = async (
     workingDirectory?: string
 ) => {
     await exec('npm install', [], {
-        // cwd: workingDirectory,
+        cwd: workingDirectory,
     });
-
-    console.log(testCommand);
 
     try {
         await exec(testCommand, [], {
@@ -18,6 +16,7 @@ export const runTest = async (
                 ...process.env,
                 PLAYWRIGHT_JSON_OUTPUT_NAME: REPORT_PATH,
             },
+            cwd: workingDirectory,
         });
     } catch (error) {
         console.log(error);
