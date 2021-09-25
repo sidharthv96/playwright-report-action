@@ -3,12 +3,12 @@ import { relative } from 'path';
 import stripAnsi from 'strip-ansi';
 
 import { Annotation } from './Annotation';
-import { JsonReport } from '../typings/JsonReport';
+import { JSONReport } from '../typings/JsonReport';
 
 export const createFailedTestsAnnotations = (
-    jsonReport: JsonReport
+    jsonReport: JSONReport
 ): Array<Annotation> => {
-    const testResults = jsonReport.testResults;
+    const testResults = jsonReport.testResultsPerFile;
 
     if (!testResults) {
         return [];
@@ -18,22 +18,24 @@ export const createFailedTestsAnnotations = (
 
     const cwd = process.cwd();
 
-    testResults.forEach(({ assertionResults, name: testResultFilename }) => {
+    testResults.forEach((assertionResults) => {
         if (!assertionResults) {
             return;
         }
 
         annotations.push(
             ...assertionResults
-                .filter(({ status }) => status === 'failed')
+                .filter(({ ok }) => !ok)
                 .map<Annotation>(
-                    ({ location, ancestorTitles, title, failureMessages }) => ({
+                    ({ line, parents, title, file, failureMessages }) => ({
                         annotation_level: 'failure',
-                        path: relative(cwd, testResultFilename),
-                        start_line: location?.line ?? 0,
-                        end_line: location?.line ?? 0,
-                        title: ancestorTitles?.concat(title).join(' > '),
-                        message: stripAnsi(failureMessages?.join('\n\n') ?? ''),
+                        path: relative(cwd, file),
+                        start_line: line ?? 0,
+                        end_line: line ?? 0,
+                        title: parents?.concat(title).join(' > '),
+                        message: stripAnsi(
+                            failureMessages?.flat(1).join('\n\n') ?? ''
+                        ),
                     })
                 )
         );

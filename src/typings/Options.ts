@@ -5,7 +5,7 @@ import { icons } from '../format/strings.json';
 
 export type IconType = keyof typeof icons;
 
-export type AnnotationType = 'all' | 'none' | 'coverage' | 'failed-tests';
+export type AnnotationType = 'all' | 'none' | 'failed-tests';
 export type PackageManagerType = 'npm' | 'yarn';
 export type SkipStepType = 'all' | 'none' | 'install';
 
@@ -26,7 +26,6 @@ export type Options = {
 const validAnnotationOptions: Array<AnnotationType> = [
     'all',
     'none',
-    'coverage',
     'failed-tests',
 ];
 

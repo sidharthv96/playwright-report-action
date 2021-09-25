@@ -2,7 +2,7 @@ import { collectCoverage } from './collectCoverage';
 import { installDependencies } from './installDependencies';
 import { parseCoverage } from './parseCoverage';
 import { runTest } from './runTest';
-import { JsonReport } from '../typings/JsonReport';
+import { JSONReport } from '../typings/JsonReport';
 import {
     Options,
     shouldInstallDeps,
@@ -13,11 +13,11 @@ import { DataCollector } from '../utils/DataCollector';
 import { runStage } from '../utils/runStage';
 
 export const getCoverage = async (
-    dataCollector: DataCollector<JsonReport>,
+    dataCollector: DataCollector<JSONReport>,
     options: Options,
     runAll: boolean,
     coverageFilePath: string | undefined
-): Promise<JsonReport> => {
+): Promise<JSONReport> => {
     await runStage('install', dataCollector, async (skip) => {
         if (
             coverageFilePath ||
@@ -55,7 +55,7 @@ export const getCoverage = async (
         }
     );
 
-    const [coverageParsed, jsonReport] = await runStage(
+    const [coverageParsed, JSONReport] = await runStage(
         'parseCoverage',
         dataCollector,
         async (skip) => {
@@ -63,15 +63,15 @@ export const getCoverage = async (
                 skip();
             }
 
-            const jsonReport = parseCoverage(rawCoverage!);
+            const JSONReport = parseCoverage(rawCoverage!);
 
-            return jsonReport;
+            return JSONReport;
         }
     );
 
-    if (!coverageParsed || !jsonReport) {
+    if (!coverageParsed || !JSONReport) {
         throw FailReason.FAILED_GETTING_COVERAGE;
     }
 
-    return jsonReport;
+    return JSONReport;
 };

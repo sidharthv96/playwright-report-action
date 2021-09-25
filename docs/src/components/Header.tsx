@@ -60,7 +60,7 @@ export const Header = ({ links }: HeaderProps) => {
                     <HStack>
                         <Link
                             passHref
-                            href="https://www.github.com/ArtiomTr/jest-coverage-report-action"
+                            href="https://github.com/sidharthv96/playwright-report-action"
                         >
                             <IconButton
                                 as="a"
