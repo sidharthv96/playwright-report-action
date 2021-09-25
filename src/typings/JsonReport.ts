@@ -1,104 +1,81 @@
-export type JsonReport = {
+export interface Summary {
+    testResults: Spec[];
     numFailedTestSuites: number;
     numFailedTests: number;
     numPassedTestSuites: number;
     numPassedTests: number;
-    numPendingTestSuites: number;
-    numPendingTests: number;
-    numRuntimeErrorTestSuites: number;
-    numTodoTests: number;
     numTotalTestSuites: number;
     numTotalTests: number;
-    openHandles?: unknown[];
-    snapshot: Snapshot;
-    startTime: number;
     success: boolean;
-    testResults?: TestResult[];
-    wasInterrupted: boolean;
-    coverageMap: CoverageMap;
-};
+}
 
-export type Snapshot = {
-    added: number;
-    didUpdate: boolean;
-    failure: boolean;
-    filesAdded: number;
-    filesRemoved: number;
-    filesRemovedList?: unknown[];
-    filesUnmatched: number;
-    filesUpdated: number;
-    matched: number;
-    total: number;
-    unchecked: number;
-    uncheckedKeysByFile?: unknown[];
-    unmatched: number;
-    updated: number;
-};
+export interface JSONReport {
+    suites: Suite[];
+    errors: Error[];
+    summary: Summary;
+    testResultsPerFile: Spec[][];
+}
 
-export type TestResult = {
-    assertionResults?: AssertionResult[];
-    endTime: number;
-    message: string;
-    name: string;
-    startTime: number;
-    status: string;
-    summary: string;
-};
-
-export type AssertionResult = {
-    ancestorTitles?: string[];
-    failureMessages?: string[];
-    fullName: string;
-    location: Location;
-    status: string;
+export interface Suite {
     title: string;
-};
-
-export type Location = {
-    column?: number;
+    file: string;
+    column: number;
     line: number;
-};
+    specs: Spec[];
+    suites?: Suite[];
+}
+export interface Spec {
+    tags: string[];
+    title: string;
+    ok: boolean;
+    parents: string[];
+    tests: Test[];
+    file: string;
+    line: number;
+    column: number;
+    failureMessages: string[][];
+}
+export interface Test {
+    timeout: number;
+    annotations: { type: string; description?: string }[];
+    expectedStatus: TestStatus;
+    projectName: string;
+    results: TestResult[];
+    status: 'skipped' | 'expected' | 'unexpected' | 'flaky';
+}
+export interface TestResult {
+    workerIndex: number;
+    status: TestStatus | undefined;
+    duration: number;
+    error: TestError | undefined;
+    stdout: STDIOEntry[];
+    stderr: STDIOEntry[];
+    retry: number;
+    steps?: TestStep[];
+    attachments: {
+        name: string;
+        path?: string;
+        body?: string;
+        contentType: string;
+    }[];
+}
+export interface TestStep {
+    title: string;
+    duration: number;
+    error: TestError | undefined;
+    steps?: TestStep[];
+}
 
-export type Range = {
-    start?: Location;
-    end?: Location;
-};
+export type STDIOEntry = { text: string } | { buffer: string };
 
-export type CoverageMap = Record<string, FileCoverage>;
+export type TestStatus = 'passed' | 'failed' | 'timedOut' | 'skipped';
+export interface TestError {
+    message?: string;
+    stack?: string;
+    value?: string;
+}
 
-export type FileCoverage = {
-    path: string;
-    statementMap: StatementMap;
-    fnMap: FunctionMap;
-    branchMap: BranchMap;
-    s: HitMap;
-    f: HitMap;
-    b: ArrayHitMap;
-};
-
-export type StatementMap = Record<number, StatementCoverage>;
-
-export type StatementCoverage = {
-    start: Location;
-    end: Location;
-};
-
-export type FunctionMap = Record<number, FunctionCoverage>;
-
-export type FunctionCoverage = {
-    name: string;
-    decl: Range;
-    loc: Range;
-};
-
-export type BranchMap = Record<number, BranchCoverage>;
-
-export type BranchCoverage = {
-    loc: Range;
-    type: string;
-    locations?: Range[];
-};
-
-export type HitMap = Record<number, number>;
-
-export type ArrayHitMap = Record<number, number[]>;
+export interface Location {
+    line: number;
+    column?: number;
+}

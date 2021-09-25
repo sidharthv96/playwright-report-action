@@ -1,23 +1,20 @@
 import { setFailed } from '@actions/core';
 import { context, getOctokit } from '@actions/github';
 
-import { createCoverageAnnotations } from './annotations/createCoverageAnnotations';
 import { createFailedTestsAnnotations } from './annotations/createFailedTestsAnnotations';
-import { formatCoverageAnnotations } from './format/annotations/formatCoverageAnnotations';
 import { formatFailedTestsAnnotations } from './format/annotations/formatFailedTestsAnnotations';
 import { generateCommitReport } from './report/generateCommitReport';
 import { generatePRReport } from './report/generatePRReport';
 import { createReport } from './stages/createReport';
 import { getCoverage } from './stages/getCoverage';
-import { switchBranch } from './stages/switchBranch';
-import { JsonReport } from './typings/JsonReport';
+import { JSONReport } from './typings/JsonReport';
 import { getOptions } from './typings/Options';
 import { createDataCollector } from './utils/DataCollector';
 import { i18n } from './utils/i18n';
 import { runStage } from './utils/runStage';
 
 export const run = async (
-    dataCollector = createDataCollector<JsonReport>()
+    dataCollector = createDataCollector<JSONReport>()
 ) => {
     const isInPR = context.eventName === 'pull_request';
 
@@ -46,43 +43,6 @@ export const run = async (
 
     if (headCoverage) {
         dataCollector.add(headCoverage);
-    }
-
-    const [isSwitched] = await runStage(
-        'switchToBase',
-        dataCollector,
-        async (skip) => {
-            const baseBranch = context.payload.pull_request?.base.ref;
-
-            if (!isInPR || !baseBranch) {
-                skip();
-            }
-
-            await switchBranch(baseBranch);
-        }
-    );
-
-    const ignoreCollector = createDataCollector<JsonReport>();
-
-    const [, baseCoverage] = await runStage(
-        'baseCoverage',
-        dataCollector,
-        async (skip) => {
-            if (!isSwitched) {
-                skip();
-            }
-
-            return await getCoverage(
-                ignoreCollector,
-                options,
-                true,
-                options.baseCoverageFile
-            );
-        }
-    );
-
-    if (baseCoverage) {
-        dataCollector.add(baseCoverage);
     }
 
     const [isReportContentGenerated, summaryReport] = await runStage(
@@ -140,27 +100,8 @@ export const run = async (
         );
     });
 
-    await runStage('coverageAnnotations', dataCollector, async (skip) => {
-        if (
-            !isHeadCoverageGenerated ||
-            !['all', 'coverage'].includes(options.annotations)
-        ) {
-            skip();
-        }
-
-        const coverageAnnotations = createCoverageAnnotations(headCoverage!);
-
-        if (coverageAnnotations.length === 0) {
-            skip();
-        }
-
-        const octokit = getOctokit(options.token);
-        await octokit.checks.create(
-            formatCoverageAnnotations(coverageAnnotations)
-        );
-    });
-
     if (dataCollector.get().errors.length > 0) {
+        console.log(JSON.stringify(dataCollector.get().errors));
         setFailed(i18n('failed'));
     }
 };
