@@ -15,7 +15,7 @@ export const runStage = async <T, V>(
     action: (skip: () => never) => Promise<T> | T
 ): Promise<StageResult<T>> => {
     const stageKey = `stages.${stage}`;
-        console.log(stageKey);
+    console.log(`::group::${stageKey}`);
 
     dataCollector.info(
         i18n('stages.defaults.begin', {
@@ -53,5 +53,6 @@ export const runStage = async <T, V>(
                 stage: i18n(stageKey),
             })
         );
+        console.log('::endgroup::');
     }
 };
