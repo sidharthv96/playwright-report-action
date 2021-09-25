@@ -59,7 +59,7 @@ export const LayoutDocs = ({ children, meta }: LayoutProps) => {
                         )}
                     </Box>
                     <MdLink
-                        href={`https://github.com/ArtiomTr/jest-coverage-report-action/tree/master/docs/src/pages${pathname}.md`}
+                        href={`https://github.com/sidharthv96/playwright-report-action/tree/master/docs/src/pages${pathname}.md`}
                     >
                         View this page on GitHub
                     </MdLink>

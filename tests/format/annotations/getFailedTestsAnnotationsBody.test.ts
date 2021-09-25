@@ -9,7 +9,7 @@ describe('getFailedTestsAnnotationsBody', () => {
                 summary: 'Simple summary',
             })
         )
-            .toBe(`Created failed tests' annotations. To disable them, see [documentation](https://github.com/ArtiomTr/jest-coverage-report-action#jest-coverage-report-).
+            .toBe(`Created failed tests' annotations. To disable them, see [documentation](https://github.com/sidharthv96/playwright-report-action#jest-coverage-report-).
 Failures`);
     });
 });
