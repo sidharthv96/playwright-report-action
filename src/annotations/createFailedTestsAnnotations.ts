@@ -1,12 +1,14 @@
-import { relative } from 'path';
+import { join, relative } from 'path';
 
 import stripAnsi from 'strip-ansi';
 
 import { Annotation } from './Annotation';
 import { JSONReport } from '../typings/JsonReport';
+import { Options } from '../typings/Options';
 
 export const createFailedTestsAnnotations = (
-    jsonReport: JSONReport
+    jsonReport: JSONReport,
+    { workingDirectory }: Options
 ): Array<Annotation> => {
     const testResults = jsonReport.testResultsPerFile;
 
@@ -29,10 +31,15 @@ export const createFailedTestsAnnotations = (
                 .filter(({ ok }) => !ok)
                 .map<Annotation>(
                     ({ line, parents, title, file, failureMessages }) => {
-                        console.log(relative(cwd, file));
+                        console.log(
+                            join(workingDirectory ?? '', relative(cwd, file))
+                        );
                         return {
                             annotation_level: 'failure',
-                            path: relative(cwd, file),
+                            path: join(
+                                workingDirectory ?? '',
+                                relative(cwd, file)
+                            ),
                             start_line: line ?? 0,
                             end_line: line ?? 0,
                             title: parents?.concat(title).join(' > '),
