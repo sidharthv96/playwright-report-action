@@ -1,5 +1,5 @@
 {
-    "name": "jest-coverage-report-action",
+    "name": "playwright-report-action",
     "private": true,
     "version": "1.0.0",
     "description": "",
@@ -14,7 +14,7 @@
         "lint": "eslint ."
     },
     "keywords": [],
-    "author": "Artiom Tretjakovas <artiom.tretjakovas2@gmail.com>",
+    "author": "Sidharth Vinod <sidharthv96@gmail.com>",
     "license": "MIT",
     "dependencies": {
         "@actions/core": "^1.2.6",
