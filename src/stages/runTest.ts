@@ -12,10 +12,14 @@ export const runTest = async (
 
     console.log(testCommand);
 
-    await exec(testCommand, [], {
-        env: {
-            ...process.env,
-            PLAYWRIGHT_JSON_OUTPUT_NAME: REPORT_PATH,
-        },
-    });
+    try {
+        await exec(testCommand, [], {
+            env: {
+                ...process.env,
+                PLAYWRIGHT_JSON_OUTPUT_NAME: REPORT_PATH,
+            },
+        });
+    } catch (error) {
+        console.log(error);
+    }
 };
