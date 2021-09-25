@@ -25,6 +25,10 @@ This action uses [Jest](https://github.com/facebook/jest) to extract code covera
   <img alt="PR Comment example" width="540" src="./img/Rejected-PR-screenshot.png">
 </p>
 
+## Status
+
+This action is being developed and is in Beta state. There will be bugs and inconsistencies. Please raise Issues.
+
 ## Usage
 
 1. Install and configure [Jest](https://github.com/facebook/jest).
